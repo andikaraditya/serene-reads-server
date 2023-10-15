@@ -1,0 +1,19 @@
+{
+  "name": "serene-reads-server",
+  "version": "1.0.0",
+  "description": "```\r POST /register\r POST /login\r POST /books\r GET /books/BookId\r POST /books/:BookId/posts\r GET /books/:BookId/posts/:PostId\r ```\r #\r ## POST /register\r > Register a new user",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "^8.11.3",
+    "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.1"
+  }
+}
