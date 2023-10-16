@@ -54,8 +54,10 @@ GET /books/:BookId/posts/:PostId
 > Create a new Book Forum
 
 - headers
-```
-not needed
+```json
+{
+    "access_token": "string"
+}
 ```
 
 - request
@@ -76,6 +78,32 @@ not needed
     "summary": "string", 
     "ISBN": "string", 
 }
+```
+
+## GET /books
+> Get currently availabe Book Forums
+
+- headers
+```
+not needed
+```
+
+- request
+```
+not needed
+```
+
+- response (201)
+```json
+[
+    {
+    "title": "string", 
+    "author": "string", 
+    "summary": "string", 
+    "ISBN": "string",
+    },
+    ...,
+]
 ```
 
 ## GET /books/:BookId
@@ -134,9 +162,6 @@ not needed
 {
     "title": "string",
     "content": "string",
-    "User": {
-        "username": "string"
-    }
 }
 ```
 

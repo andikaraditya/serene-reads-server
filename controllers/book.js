@@ -84,7 +84,7 @@ class Controller {
                 throw {name: "PostNotFound"}
             }
 
-            res.status(200).json(data)
+            res.status(201).json(data)
         } catch (error) {
             next(error)
         }
