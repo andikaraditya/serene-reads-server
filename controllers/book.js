@@ -30,6 +30,22 @@ class Controller {
             next(error)
         }
     }
+
+    static async getBookById(req, res, next) {
+        try {
+            const {BookId} = req.params
+
+            const book = await Book.findByPk(BookId)
+
+            if (!book) {
+                throw {name: "BookNotFound"}
+            }
+
+            res.status(200).json(book)
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 module.exports = Controller

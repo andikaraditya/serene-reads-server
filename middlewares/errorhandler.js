@@ -17,6 +17,9 @@ function errorhandler(error, req, res, next) {
         case "AuthenticationFailed":
             res.status(401).json({message: "User authentication failed"})
             break;
+        case "BookNotFound":
+            res.status(404).json({message: "Book not found"})
+            break;
         default:
             res.status(500).json(error)
             console.log(error)

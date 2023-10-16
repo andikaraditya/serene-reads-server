@@ -7,9 +7,7 @@ router.get("/", Book.getBooks)
 
 router.post("/", authentication, Book.createBook)
 
-router.get("/:BookId", (req, res) => {
-    res.send("Get Book Forum by id")
-})
+router.get("/:BookId", Book.getBookById)
 
 router.post("/:BookId/posts", (req, res) => {
     res.send("Create post in a forum")
