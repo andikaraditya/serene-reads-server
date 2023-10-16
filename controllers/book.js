@@ -4,7 +4,10 @@ class Controller {
     static async getBooks(req, res, next) {
         try {
             const data = await Book.findAll({
-                order: [["title", "ASC"]]
+                order: [["title", "ASC"]],
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"]
+                }
             })
 
             res.status(200).json(data)
@@ -36,7 +39,19 @@ class Controller {
             const {BookId} = req.params
 
             const book = await Book.findByPk(BookId,{
-                include: Post
+                include: {
+                    model: Post,
+                    include: {
+                        model: User,
+                        attributes: ["username"]
+                    },
+                    attributes: {
+                        exclude: ["createdAt", "updatedAt"]
+                    }
+                },
+                attributes: {
+                    exclude: ["createdAt", "updatedAt"]
+                }
             })
 
             if (!book) {
