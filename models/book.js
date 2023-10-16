@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     summary: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: "summary cannot be null",
@@ -47,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
         notNull: "isbn cannot be null",
         notEmpty: "isbn cannot be empty"
       }
+    },
+    imageUrl: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,

@@ -14,6 +14,15 @@ function errorhandler(error, req, res, next) {
         case "EmailPasswordIncorrect":
             res.status(400).json({message: "Email or password is incorrect"})
             break;
+        case "AuthenticationFailed":
+            res.status(401).json({message: "User authentication failed"})
+            break;
+        case "BookNotFound":
+            res.status(404).json({message: "Book not found"})
+            break;
+        case "PostNotFound":
+            res.status(404).json({message: "Post not found"})
+            break;
         default:
             res.status(500).json(error)
             console.log(error)
