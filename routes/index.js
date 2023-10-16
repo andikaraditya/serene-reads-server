@@ -3,9 +3,7 @@ const router = express.Router()
 const books = require('./books')
 const Auth = require('../controllers/auth');
 
-router.post("/login", (req, res) => {
-    res.send("Login")
-})
+router.post("/login", Auth.login)
 
 router.post("/register", Auth.register)
 
