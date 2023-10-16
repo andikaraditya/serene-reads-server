@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     summary: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: "summary cannot be null",
