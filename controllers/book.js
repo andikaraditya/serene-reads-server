@@ -1,4 +1,4 @@
-const {Book} = require('../models');
+const {Book, Post} = require('../models');
 
 class Controller {
     static async getBooks(req, res, next) {
@@ -35,13 +35,35 @@ class Controller {
         try {
             const {BookId} = req.params
 
-            const book = await Book.findByPk(BookId)
+            const book = await Book.findByPk(BookId,{
+                include: Post
+            })
 
             if (!book) {
                 throw {name: "BookNotFound"}
             }
 
             res.status(200).json(book)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async createPost(req, res, next) {
+        try {
+            const {BookId} = req.params
+            const {title, content} = req.body
+            const {id} = req.user
+
+            // console.log({BookId, title, content, id})
+            const data = await Post.create({
+                title: title,
+                content: content,
+                UserId: id,
+                BookId: BookId
+            })
+
+            res.status(201).json(data)
         } catch (error) {
             next(error)
         }
