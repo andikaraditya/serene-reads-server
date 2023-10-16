@@ -47,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
         notNull: "isbn cannot be null",
         notEmpty: "isbn cannot be empty"
       }
+    },
+    imageUrl: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,
