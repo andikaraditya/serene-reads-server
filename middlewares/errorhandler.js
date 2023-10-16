@@ -14,6 +14,9 @@ function errorhandler(error, req, res, next) {
         case "EmailPasswordIncorrect":
             res.status(400).json({message: "Email or password is incorrect"})
             break;
+        case "AuthenticationFailed":
+            res.status(401).json({message: "User authentication failed"})
+            break;
         default:
             res.status(500).json(error)
             console.log(error)
