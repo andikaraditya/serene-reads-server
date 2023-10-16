@@ -1,14 +1,13 @@
 const express = require("express")
 const router = express.Router()
-const books = require('./books');
+const books = require('./books')
+const Auth = require('../controllers/auth');
 
-router.get("/login", (req, res) => {
+router.post("/login", (req, res) => {
     res.send("Login")
 })
 
-router.get("/register", (req, res) => {
-    res.send("Register")
-})
+router.post("/register", Auth.register)
 
 router.use("/books", books)
 
