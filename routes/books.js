@@ -11,8 +11,6 @@ router.get("/:BookId", Book.getBookById)
 
 router.post("/:BookId/posts", authentication, Book.createPost)
 
-router.get("/:BookId/posts/:PostId", (req, res) => {
-    res.send("Geta a post in a forum by id")
-})
+router.get("/:BookId/posts/:PostId", Book.getPostById)
 
 module.exports = router

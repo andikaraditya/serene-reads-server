@@ -1,4 +1,4 @@
-const {Book, Post} = require('../models');
+const {Book, Post, User} = require('../models');
 
 class Controller {
     static async getBooks(req, res, next) {
@@ -64,6 +64,27 @@ class Controller {
             })
 
             res.status(201).json(data)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async getPostById(req, res, next) {
+        try {
+            const {PostId} = req.params
+
+            const data = await Post.findByPk(PostId, {
+                include: {
+                    model: User,
+                    attributes: ["username"]
+                }
+            })
+
+            if (!data) {
+                throw {name: "PostNotFound"}
+            }
+
+            res.status(200).json(data)
         } catch (error) {
             next(error)
         }

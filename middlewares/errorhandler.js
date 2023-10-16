@@ -20,6 +20,9 @@ function errorhandler(error, req, res, next) {
         case "BookNotFound":
             res.status(404).json({message: "Book not found"})
             break;
+        case "PostNotFound":
+            res.status(404).json({message: "Post not found"})
+            break;
         default:
             res.status(500).json(error)
             console.log(error)
