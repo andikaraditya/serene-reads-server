@@ -3,9 +3,7 @@ const authentication = require("../middlewares/authentication")
 const Book = require('../controllers/book');
 const router = express.Router()
 
-router.get("/", (req, res) => {
-    res.send("Get all Book Forum")
-})
+router.get("/", Book.getBooks)
 
 router.post("/", authentication, Book.createBook)
 
