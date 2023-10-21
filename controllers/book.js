@@ -1,4 +1,5 @@
 const {Book, Post, User} = require('../models');
+const axios = require('axios');
 
 class Controller {
     static async getBooks(req, res, next) {
@@ -100,6 +101,41 @@ class Controller {
             }
 
             res.status(201).json(data)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async searchBook(req, res, next) {
+        try {
+            const {title, author, book_type, categories, page=1} = req.query
+            const {data} = await axios({
+                method: 'GET',
+                url: 'https://book-finder1.p.rapidapi.com/api/search',
+                params: {
+                    title,
+                    author,
+                    book_type,
+                    categories,
+                    results_per_page: 10,
+                    page
+                },
+                headers: {
+                    'X-RapidAPI-Key': '12207e3572msh6ba53cfe8a28e27p16c197jsn27170b1025ac',
+                    'X-RapidAPI-Host': 'book-finder1.p.rapidapi.com'
+                }
+            })
+
+            const output = data.results.map((el) => {
+                return {
+                    title: el.title,
+                    author: el.authors[0],
+                    summary: el.summary,
+                    isbn: el.canonical_isbn,
+                    imageUrl: el.published_works[0].cover_art_url
+                }
+            })
+            res.status(200).json(output)
         } catch (error) {
             next(error)
         }
