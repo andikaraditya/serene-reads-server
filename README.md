@@ -222,3 +222,33 @@ not needed
     ...,
 ]
 ```
+
+## GET /news
+> Get all news about literature
+- headers
+```
+not needed
+```
+- query
+```json
+{
+    "page": "integer" // default 1
+}
+```
+
+- response (200)
+```json
+[
+    {
+    "author": "string", 
+    "title": "string", 
+    "description": "string", 
+    "url": "string", 
+    "urlToImage": "string",
+    "publishedAt": "string",
+    "content": "string",
+    "source": "string",
+    },
+    ...,
+]
+```
