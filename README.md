@@ -66,7 +66,8 @@ GET /books/:BookId/posts/:PostId
     "title": "string", //required
     "author": "string", //required
     "summary": "string", //required
-    "ISBN": "string", //required
+    "isbn": "string", //required,
+    "imageUrl": "string"
 }
 ```
 
@@ -76,7 +77,8 @@ GET /books/:BookId/posts/:PostId
     "title": "string", 
     "author": "string", 
     "summary": "string", 
-    "ISBN": "string", 
+    "isbn": "string", 
+    "imageUrl": "string"
 }
 ```
 
@@ -100,7 +102,8 @@ not needed
     "title": "string", 
     "author": "string", 
     "summary": "string", 
-    "ISBN": "string",
+    "isbn": "string", 
+    "imageUrl": "string"
     },
     ...,
 ]
@@ -121,10 +124,11 @@ not needed
 ```json
 {
     {
-        "title": "string",
-        "author": "string",
-        "summary": "string",
-        "ISBN": "string",
+        "title": "string", 
+        "author": "string", 
+        "summary": "string", 
+        "isbn": "string", 
+        "imageUrl": "string",
         "Posts": [
             {
                 "title": "string",
@@ -187,4 +191,34 @@ not needed
         }
     }
 }
+```
+
+## GET /books/search
+> Search all books
+- headers
+```
+not needed
+```
+- query
+```json
+{
+    "title": "string",
+    "author": "string",
+    "book_type": "string", // ["fiction", "nonfiction"]
+    "page": "integer" // default 1
+}
+```
+
+- response (200)
+```json
+[
+    {
+    "title": "string", 
+    "author": "string", 
+    "summary": "string", 
+    "isbn": "string", 
+    "imageUrl": "string"
+    },
+    ...,
+]
 ```

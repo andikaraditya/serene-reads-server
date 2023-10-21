@@ -7,6 +7,8 @@ router.get("/", Book.getBooks)
 
 router.post("/", authentication, Book.createBook)
 
+router.get("/search", Book.searchBook)
+
 router.get("/:BookId", Book.getBookById)
 
 router.post("/:BookId/posts", authentication, Book.createPost)
