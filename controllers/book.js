@@ -121,8 +121,8 @@ class Controller {
                     page
                 },
                 headers: {
-                    'X-RapidAPI-Key': '12207e3572msh6ba53cfe8a28e27p16c197jsn27170b1025ac',
-                    'X-RapidAPI-Host': 'book-finder1.p.rapidapi.com'
+                    'X-RapidAPI-Key': process.env.X_RapidAPI_Key,
+                    'X-RapidAPI-Host': process.env.X_RapidAPI_Host
                 }
             })
 
