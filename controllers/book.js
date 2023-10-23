@@ -47,12 +47,13 @@ class Controller {
                         attributes: ["username"]
                     },
                     attributes: {
-                        exclude: ["createdAt", "updatedAt"]
-                    }
+                        exclude: ["createdAt","updatedAt"]
+                    },
                 },
                 attributes: {
                     exclude: ["createdAt", "updatedAt"]
-                }
+                },
+                order:[[Post , "createdAt", "DESC"]]
             })
 
             if (!book) {
