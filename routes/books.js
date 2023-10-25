@@ -13,6 +13,8 @@ router.get("/:BookId", Book.getBookById)
 
 router.post("/:BookId/posts", authentication, Book.createPost)
 
+router.post("/:BookId/posts/schedules", authentication, Book.handleScheduledPost)
+
 router.get("/:BookId/posts/:PostId", Book.getPostById)
 
 module.exports = router
