@@ -7,7 +7,10 @@ POST /login
 POST /books
 GET /books/BookId
 POST /books/:BookId/posts
+POST /books/:BookId/posts/schedules
 GET /books/:BookId/posts/:PostId
+GET /books/search
+GET /news
 ```
 #
 ## POST /register
@@ -169,6 +172,33 @@ not needed
 }
 ```
 
+## POST /books/:BookId/posts/schedules
+> Create a Book Forum post
+
+- headers
+```json
+{
+    "access_token": "string"
+}
+```
+
+- request
+```json
+{
+    "title": "string", //required
+    "content": "string", //required
+    "scheduledTime": "string" // > timestamp  //required
+}
+```
+
+- response (201)
+```json
+{
+    "title": "string",
+    "content": "string",
+}
+```
+
 ## GET /books/:BookId/posts/:PostId
 > Get a selected Book Forum post
 - headers
@@ -205,8 +235,11 @@ not needed
     "title": "string",
     "author": "string",
     "book_type": "string", // ["fiction", "nonfiction"]
-    "page": "integer" // default 1
+    "page": "integer", // default 1
+    "categories": "string" 
 }
+
+// available categories ['Mystery & Suspense', 'Science Fiction & Fantasy', 'Animals, Bugs & Pets', 'Art, Creativity & Music', 'General Literature', 'Hobbies, Sports & Outdoors', 'Science & Technology', 'Real Life','Reference']
 ```
 
 - response (200)
