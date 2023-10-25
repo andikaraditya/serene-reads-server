@@ -102,7 +102,7 @@ class Controller {
                 })
             } else {
                 token = createToken({
-                    id: newUser.id,
+                    id: user.id,
                     email: user.email,
                     role: user.role,
                 })
