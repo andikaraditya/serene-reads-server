@@ -8,6 +8,8 @@ router.post("/login", Auth.login)
 
 router.post("/register", Auth.register)
 
+router.post("/auth/google", Auth.googleLogin)
+
 router.get("/news", News.getNews)
 
 router.use("/books", books)

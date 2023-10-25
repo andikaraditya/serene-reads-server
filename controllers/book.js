@@ -1,15 +1,40 @@
 const {Book, Post, User} = require('../models');
 const axios = require('axios');
+const { Op } = require("sequelize");
+const schedule = require('node-schedule');
 
 class Controller {
     static async getBooks(req, res, next) {
         try {
-            const data = await Book.findAll({
+            const {title, author, page} = req.query
+
+            const options = {
                 order: [["title", "ASC"]],
                 attributes: {
                     exclude: ["createdAt", "updatedAt"]
+                },
+                limit: 8,
+                offset: 0,
+                where: {}
+            }
+
+            if (title) {
+                options.where.title = {
+                    [Op.iLike]: `%${title}%`
                 }
-            })
+            }
+
+            if (author) {
+                options.where.author = {
+                    [Op.iLike]: `%${author}%`
+                }
+            }
+
+            if (page) {
+                options.offset = (page-1) * 8
+            }
+
+            const data = await Book.findAll(options)
 
             res.status(200).json(data)
         } catch (error) {
@@ -137,6 +162,57 @@ class Controller {
                 }
             })
             res.status(200).json(output)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async handleScheduledPost(req, res, next) {
+        try {
+            // console.log(req.body)
+            const {title, content, scheduledTime} = req.body
+            const {id} = req.user
+            const {BookId} = req.params
+
+            if (!title) {
+                throw {name: "TitleEmpty"}
+            }
+
+            if (!content) {
+                throw {name: "ContentEmpty"}
+            }
+
+            if (!scheduledTime) {
+                throw {name: "ScheduleEmpty"}
+            }
+
+            if (!BookId) {
+                throw {name: "BookIdEmpty"}
+            }
+
+            const book = await Book.findByPk(BookId)
+
+            if (!book) {
+                throw {name: "BookNotFound"}
+            }
+
+            const date = new Date(scheduledTime);
+
+            schedule.scheduleJob(date, function(){
+                // console.log('Scheduled Post.');
+                // console.log({title, content, scheduledTime}, "<<<< req body")
+                // console.log(id, "<<<< req user")
+                // console.log(BookId, "<<<< req params")
+                // console.log(date, "<<<< scheduled date instance")
+
+                Post.create({
+                    title: title,
+                    content: content,
+                    UserId: id,
+                    BookId: BookId
+                })
+            });
+            res.status(200).json("Post has been scheduled")
         } catch (error) {
             next(error)
         }
