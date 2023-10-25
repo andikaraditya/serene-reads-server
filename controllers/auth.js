@@ -42,6 +42,10 @@ class Controller {
                 throw {name: "EmailPasswordIncorrect"}
             }
 
+            if (user.password === "google") {
+                throw {name: "GoogleLogin"}
+            }
+
             const isPasswordCorrect = comparePassword(password, user.password)
             if (!isPasswordCorrect) {
                 throw {name: "EmailPasswordIncorrect"}
