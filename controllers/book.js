@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 class Controller {
     static async getBooks(req, res, next) {
         try {
-            const {title, page} = req.query
+            const {title, author, page} = req.query
 
             const options = {
                 order: [["title", "ASC"]],
@@ -13,14 +13,19 @@ class Controller {
                     exclude: ["createdAt", "updatedAt"]
                 },
                 limit: 8,
-                offset: 0
+                offset: 0,
+                where: {}
             }
 
             if (title) {
-                options.where = {
-                    title: {
-                        [Op.iLike]: `%${title}%`
-                    }
+                options.where.title = {
+                    [Op.iLike]: `%${title}%`
+                }
+            }
+
+            if (author) {
+                options.where.author = {
+                    [Op.iLike]: `%${author}%`
                 }
             }
 
