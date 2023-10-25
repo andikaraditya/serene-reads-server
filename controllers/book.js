@@ -1,15 +1,39 @@
 const {Book, Post, User} = require('../models');
 const axios = require('axios');
+const { Op } = require("sequelize");
 
 class Controller {
     static async getBooks(req, res, next) {
         try {
-            const data = await Book.findAll({
+            const {title, author, page} = req.query
+
+            const options = {
                 order: [["title", "ASC"]],
                 attributes: {
                     exclude: ["createdAt", "updatedAt"]
+                },
+                limit: 8,
+                offset: 0,
+                where: {}
+            }
+
+            if (title) {
+                options.where.title = {
+                    [Op.iLike]: `%${title}%`
                 }
-            })
+            }
+
+            if (author) {
+                options.where.author = {
+                    [Op.iLike]: `%${author}%`
+                }
+            }
+
+            if (page) {
+                options.offset = (page-1) * 8
+            }
+
+            const data = await Book.findAll(options)
 
             res.status(200).json(data)
         } catch (error) {
