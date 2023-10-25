@@ -9,9 +9,10 @@ class Controller {
                 url: "https://newsapi.org/v2/everything",
                 params: {
                     apiKey: process.env.NEWS_API_KEY,
-                    q: "book OR novel OR literature",
+                    q: 'literature OR book OR novel NOT politics NOT religion NOT technology NOT game NOT gadget NOT computer',
                     sortBy: "relevancy",
                     pageSize: 20,
+                    domains: "bookriot.com,lithub.com,goodreads.com,themillions.com",
                     page
                 }
             })
