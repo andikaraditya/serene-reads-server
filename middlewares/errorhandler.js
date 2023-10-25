@@ -14,6 +14,9 @@ function errorhandler(error, req, res, next) {
         case "EmailPasswordIncorrect":
             res.status(400).json({message: "Email or password is incorrect"})
             break;
+        case "GoogleLogin":
+            res.status(400).json({message: "Use Google to login"})
+            break;
         case "AuthenticationFailed":
             res.status(401).json({message: "User authentication failed"})
             break;
